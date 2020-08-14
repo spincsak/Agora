@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchMarkets} from '../store/marketData'
+import {fetchMarkets, fetchMarketDetails} from '../store/marketData'
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 
 export class MarketList extends Component {
@@ -31,7 +31,8 @@ const mapState = reduxState => ({
 })
 
 const mapDispatch = dispatch => ({
-  getMarkets: zipCode => dispatch(fetchMarkets(zipCode))
+  getMarkets: zipCode => dispatch(fetchMarkets(zipCode)),
+  getMarketDetails: id => dispatch(fetchMarketDetails(id))
 })
 
 export default connect(mapState, mapDispatch)(MarketList)
