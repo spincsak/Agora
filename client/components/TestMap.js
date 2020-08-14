@@ -10,6 +10,7 @@ export class TestMap extends Component {
   }
 
   componentDidMount() {
+    //next, make this a search feature so the user can input a zip code.
     this.props.getMarkets('60625')
   }
 

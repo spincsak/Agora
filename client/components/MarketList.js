@@ -9,7 +9,7 @@ export class MarketList extends Component {
   }
 
   componentDidMount() {
-    this.props.getMarkets('60625')
+    console.log('list component mounted')
   }
 
   render() {
@@ -18,7 +18,7 @@ export class MarketList extends Component {
       <div id="market-list">
         <ul>
           {markets.map(market => {
-            return <li id={market.id}>{market.marketname}</li>
+            return <li key={market.id}>{market.marketname}</li>
           })}
         </ul>
       </div>
