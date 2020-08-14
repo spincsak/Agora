@@ -13,18 +13,25 @@ export const setMarkets = markets => ({
 export const fetchMarkets = zipCode => {
   return async function(dispatch) {
     try {
+      const marketList = []
+
       const {data} = await axios.get(
         `http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=${zipCode}`
       )
-      data.results.map(async result => {
-        const id = result.id
-        const {data} = await axios.get(
-          `http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=${id}`
+      data.results.forEach(async result => {
+        const response = await axios.get(
+          `http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=${result.id}`
         )
-        result.address = data.marketdetails.Address
+        const thisMarket = {
+          id: result.id,
+          name: result.marketname,
+          address: response.data.marketdetails.address
+        }
+
+        marketList.push(thisMarket)
       })
-      console.log('thunk results: ', data.results)
-      dispatch(setMarkets(data.results))
+      await Promise.all(marketList)
+      dispatch(setMarkets(marketList))
     } catch (error) {
       console.error(error)
     }
@@ -32,7 +39,7 @@ export const fetchMarkets = zipCode => {
 }
 
 //INITIAL STATE
-const initialState = {}
+const initialState = []
 
 //REDUCER
 export default function(state = initialState, action) {
