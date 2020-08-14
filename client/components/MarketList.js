@@ -18,7 +18,13 @@ export class MarketList extends Component {
       <div id="market-list">
         <ul>
           {markets.map(market => {
-            return <li key={market.id}>Name: {market.marketname}</li>
+            console.log('a single market: ', market)
+            return (
+              <li key={market.id}>
+                <div>Name: {market.marketname}</div>
+                <div>Address: {market.address}</div>
+              </li>
+            )
           })}
         </ul>
       </div>
