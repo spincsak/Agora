@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchMarkets} from '../store/markets'
-import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 
 export class MarketList extends Component {
   constructor() {
@@ -14,11 +13,13 @@ export class MarketList extends Component {
 
   render() {
     const markets = this.props.markets
+    console.log('props on MarketList ', this.props)
     return (
       <div id="market-list">
         <ul>
           {markets.map(market => {
             console.log('a single market: ', market)
+            console.log('market address: ', market.address)
             return (
               <li key={market.id}>
                 <div>Name: {market.marketname}</div>
