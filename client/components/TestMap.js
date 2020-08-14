@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchMarkets} from '../store/marketData'
+import {fetchMarkets} from '../store/markets'
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import MarketList from './MarketList'
 

@@ -16,13 +16,6 @@ export const fetchMarkets = zipCode => {
       const {data} = await axios.get(
         `http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=${zipCode}`
       )
-      data.results.map(async result => {
-        const id = result.id
-        const {data} = await axios.get(
-          `http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=${id}`
-        )
-        result.details = data.marketdetails
-      })
       dispatch(setMarkets(data.results))
     } catch (error) {
       console.error(error)
@@ -31,7 +24,7 @@ export const fetchMarkets = zipCode => {
 }
 
 //INITIAL STATE
-const initialState = []
+const initialState = {}
 
 //REDUCER
 export default function(state = initialState, action) {

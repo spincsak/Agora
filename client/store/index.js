@@ -3,11 +3,13 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
-import markets from './marketData'
+import markets from './markets'
+import singleMarket from './singleMarket'
 
 const reducer = combineReducers({
   user,
-  markets
+  markets,
+  singleMarket
 })
 
 const middleware = composeWithDevTools(
