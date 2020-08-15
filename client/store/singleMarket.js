@@ -1,24 +1,27 @@
 import axios from 'axios'
 
-//MIGHT NOT NEED THIS ONE? IDK CHECKING THUNK OPTIONS
-
 //ACTION TYPES
 const SET_SINGLE_MARKET = 'SET_SINGLE_MARKET'
 
 //ACTION CREATORS
-export const setSingleMarket = market => ({
+export const setSingleMarket = (marketObj, marketDetails) => ({
   type: SET_SINGLE_MARKET,
-  market
+  market: {
+    name: marketObj.marketname,
+    id: marketObj.id,
+    details: marketDetails
+  }
 })
 
 //THUNK CREATORS
-export const fetchMarkets = zipCode => {
+
+export const appendMarketDetails = marketObj => {
   return async function(dispatch) {
     try {
       const {data} = await axios.get(
-        `http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=${zipCode}`
+        `http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=${marketObj.id}`
       )
-      dispatch(setMarkets(data.results))
+      dispatch(setSingleMarket(marketObj, data.marketdetails))
     } catch (error) {
       console.error(error)
     }
