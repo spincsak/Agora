@@ -5,11 +5,13 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import markets from './markets'
 import coordinates from './address'
+import startLocation from './zipcode'
 
 const reducer = combineReducers({
   user,
   markets,
-  coordinates
+  coordinates,
+  startLocation
 })
 
 const middleware = composeWithDevTools(

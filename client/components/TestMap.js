@@ -4,30 +4,46 @@ import {fetchMarkets} from '../store/markets'
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import MarketList from './MarketList'
 import PinList from './PinList'
+import {fetchZipcode} from '../store/zipcode'
 
 export class TestMap extends Component {
   constructor() {
     super()
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    //next, make this a search feature so the user can input a zip code.
+    this.props.getZipcode('60625')
     this.props.getMarkets('60625')
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    console.log(event.target.value)
+    getZipcode(event.target.value)
   }
 
   render() {
     if (!this.props.markets.length) {
       return <div>Please Wait</div>
     } else {
-      const position = [41.976015, -87.671499]
       const zoomLevel = 12
-      const markets = this.props.markets
 
       return (
         <div id="map-page">
           <div id="map-div">
             <h1>Here is a Map!</h1>
-            <Map center={position} zoom={zoomLevel} id="mapid">
+            <div>
+              <form>
+                <label htmlFor="zipcode">
+                  zipcode:
+                  <input type="number" />
+                </label>
+
+                <input type="submit" value="Submit" />
+              </form>
+            </div>
+            <Map center={this.state.position} zoom={zoomLevel} id="mapid">
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -49,11 +65,14 @@ export class TestMap extends Component {
 }
 
 const mapState = reduxState => ({
-  markets: reduxState.markets
+  markets: reduxState.markets,
+  zipcode: reduxState.startLocation.zipcode,
+  position: reduxState.startLocation.position
 })
 
 const mapDispatch = dispatch => ({
-  getMarkets: zipCode => dispatch(fetchMarkets(zipCode))
+  getMarkets: zipCode => dispatch(fetchMarkets(zipCode)),
+  getZipcode: zipcode => dispatch(fetchZipcode(zipcode))
 })
 
 export default connect(mapState, mapDispatch)(TestMap)
