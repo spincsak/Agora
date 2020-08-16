@@ -33,6 +33,7 @@ export class TestMap extends Component {
               />
               {markets.forEach(market => {
                 //convert the address to lat/lang
+                //use a geocoding library
                 //create a marker for that position
               })}
 

@@ -25,6 +25,7 @@ export const fetchMarkets = zipCode => {
           market.address = details.Address
           market.products = details.products
           market.schedule = details.schedule
+          market.mapLink = details.GoogleLink
           return market
         })
       )
@@ -36,7 +37,7 @@ export const fetchMarkets = zipCode => {
 }
 
 //INITIAL STATE
-const initialState = {}
+const initialState = []
 
 //REDUCER
 export default function(state = initialState, action) {
