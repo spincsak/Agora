@@ -21,12 +21,13 @@ export const fetchMarkets = zipCode => {
           const {data} = await axios.get(
             `http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=${market.id}`
           )
-
-          market.address = data.marketdetails.Address
+          const details = data.marketdetails
+          market.address = details.Address
+          market.products = details.products
+          market.schedule = details.schedule
           return market
         })
       )
-      console.log('marketList from thunk', marketList)
       dispatch(setMarkets(marketList))
     } catch (error) {
       console.error(error)

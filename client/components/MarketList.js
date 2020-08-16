@@ -9,18 +9,15 @@ export class MarketList extends Component {
   }
 
   componentDidMount() {
-    console.log('list component mounted')
+    console.log('list component mounted!')
   }
 
   render() {
     const markets = this.props.markets
-    console.log('this.props.markets ', this.props.markets)
     return (
       <div id="market-list">
         <ul>
           {markets.map(market => {
-            console.log('a single market ', market)
-            console.log('market address ', market.address)
             return (
               <li key={market.id}>
                 <div>Name: {market.marketname}</div>
