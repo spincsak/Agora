@@ -4,12 +4,10 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import markets from './markets'
-import singleMarket from './singleMarket'
 
 const reducer = combineReducers({
   user,
-  markets,
-  singleMarket
+  markets
 })
 
 const middleware = composeWithDevTools(

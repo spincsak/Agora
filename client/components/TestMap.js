@@ -20,8 +20,6 @@ export class TestMap extends Component {
     } else {
       const position = [41.976015, -87.671499]
       const zoomLevel = 14
-      //doesn't have lat/lang, just an ID and a name. hmmmmm...
-      //let's write a new componet to just like, make a list of 'em
       const markets = this.props.markets
 
       return (
@@ -33,6 +31,11 @@ export class TestMap extends Component {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               />
+              {markets.forEach(market => {
+                //convert the address to lat/lang
+                //create a marker for that position
+              })}
+
               <Marker position={[41.976543, -87.671234]}>
                 <Popup>Hello World</Popup>
               </Marker>

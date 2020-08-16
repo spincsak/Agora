@@ -29,3 +29,7 @@ form div {
   display: flex;
   text-align: left;
 }
+
+li {
+  margin-top: 10px;
+}
