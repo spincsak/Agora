@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {fetchMarkets} from '../store/markets'
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import MarketList from './MarketList'
+import PinList from './PinList'
 
 export class TestMap extends Component {
   constructor() {
@@ -19,7 +20,7 @@ export class TestMap extends Component {
       return <div>Please Wait</div>
     } else {
       const position = [41.976015, -87.671499]
-      const zoomLevel = 14
+      const zoomLevel = 12
       const markets = this.props.markets
 
       return (
@@ -31,15 +32,10 @@ export class TestMap extends Component {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               />
-              {markets.forEach(market => {
-                //convert the address to lat/lang
-                //use a geocoding library
-                //create a marker for that position
-              })}
-
               <Marker position={[41.976543, -87.671234]}>
                 <Popup>Hello World</Popup>
               </Marker>
+              <PinList />
             </Map>
           </div>
           <div id="list-div">

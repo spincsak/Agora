@@ -16,10 +16,11 @@ export class MarketList extends Component {
     console.log('list component mounted!')
   }
 
-  async setMarket(event) {
+  //unsure if this is necessary anymore?
+  //change this so that it highlights that pin when you click it
+  setMarket(event) {
     event.preventDefault()
     const mapLink = event.target.value
-    console.log('what does my link say? ', mapLink)
     const coordinates = parseLatLang(mapLink)
     console.log('my coordinates ', coordinates)
   }
