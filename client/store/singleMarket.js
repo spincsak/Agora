@@ -16,6 +16,7 @@ export const fetchMarkets = zipCode => {
       const {data} = await axios.get(
         `http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=${zipCode}`
       )
+
       dispatch(setMarkets(data.results))
     } catch (error) {
       console.error(error)

@@ -16,7 +16,18 @@ export const fetchMarkets = zipCode => {
       const {data} = await axios.get(
         `http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=${zipCode}`
       )
-      dispatch(setMarkets(data.results))
+      const marketList = await Promise.all(
+        data.results.map(async market => {
+          const {data} = await axios.get(
+            `http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=${market.id}`
+          )
+
+          market.address = data.marketdetails.Address
+          return market
+        })
+      )
+      console.log('marketList from thunk', marketList)
+      dispatch(setMarkets(marketList))
     } catch (error) {
       console.error(error)
     }
