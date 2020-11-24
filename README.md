@@ -12,3 +12,6 @@ If you want to run the server and/or `webpack` separately, you can also
 `npm run start-server` and `npm run build-client`.
 
 From there, just follow your bliss.
+
+
+*** thanks to Fullstack Academy for the boilerplate. It's probably a way more complicated boilerplate than I needed, but if I ever WANT to implement oAuth logins, I have the power. ***
